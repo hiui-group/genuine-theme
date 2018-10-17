@@ -9,6 +9,10 @@
     "build": "cross-env NODE_ENV=production gulp",
     "precommit": "lint-staged"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hiui-group/genuine-theme.git"
+  },
   "keywords": [
     "hiui",
     "css",
