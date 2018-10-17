@@ -1,0 +1,129 @@
+$collapse-time: .2s;
+
+.sider {
+  position: fixed;
+  left:0;
+  top: 0;
+  width: 216px;
+  height: 100%;
+  overflow: hidden;
+  background-color: #FFF;
+  color: #383E47;
+  transition: all $collapse-time;
+  overflow: hidden;
+  box-shadow: inset -1px 0 0 0 #E6E7E8;
+  z-index: 2;
+
+  .sider-list-box {
+    height: 100%;
+    padding-top: 216px;
+    box-sizing: border-box;
+  }
+  
+  .sider-list {
+    height: 100%;
+    width: 233px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &-icon {
+      display: inline-block;
+      margin-right: 16px;
+    }
+  
+    li {
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+      color: #383E47;
+      opacity: .9;
+      font-size: 14px;
+      font-family: 'MI-LANTING_GB-OUTSIDE-YS';
+      user-select: none;
+  
+      .sider-list {
+        overflow: hidden;
+        display: none;
+        margin-left: -6px;
+        background-color: rgba(0, 0, 0, .03);
+  
+        .sider-list-item {
+          padding-left: 54px;
+        }
+      }
+  
+      .sider-list-item {
+        display: block;
+        height: 100%;
+        padding: 16px 32px 16px 16px;
+        box-sizing: border-box;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all $collapse-time;
+        &.noaction {
+          cursor: default;
+        }
+      }
+  
+      .sider-list-item:not(.noaction):hover,
+      .active {
+        font-family: 'MI-LANTING--GBK1-Bold';
+        background-color: rgba(66,133,244,0.08);
+        color: #4285F4;
+      }
+  
+      a {
+        color: #383E47;
+      }
+  
+      // &.open {
+      //   .sider-list {
+      //     max-height: 200px;
+      //     transition: all .2s ease-in;
+      //   }
+      // }
+
+      .mark-arrow {
+        position: absolute;
+        top: 16px;
+        left: 192px;
+      }
+  
+    }
+  }
+}
+
+
+// 折叠 sider
+// .sider.collapse {
+//   width: 48px;
+
+//   .log {
+//     img {
+//       width: 30px;
+//       height: 30px;
+//     }
+
+//     &-title {
+//       display: none;
+//     }
+//   }
+
+//   .btn-collapse {
+//     right: 6px;
+//   }
+
+//   .sider-list {
+//     li {
+//       .sider-list-item {
+//         padding: 14px 0;
+//         text-align: center;
+
+//         .sider-list-title {
+//           display: none;
+          
+//         }
+//       }
+  
+//     }
+//   }
+// }

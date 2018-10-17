@@ -1,0 +1,33 @@
+$collapse-time: .2s;
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 216px;
+  box-sizing: border-box;
+  padding: 66px 0;
+  text-align: center;
+  float: left;
+
+  a {
+    color: inherit;
+  }
+
+  .logo-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  img {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    transition: all $collapse-time;
+  }
+
+  &-title {
+    margin-top: 14px;
+    font-size: 14px;
+  }
+}

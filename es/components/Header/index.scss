@@ -1,0 +1,25 @@
+.header {
+  position: fixed;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  padding: 0 24px 0 240px;
+  font-size: 14px;
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 1;
+
+  &.border {
+    box-shadow: inset 0 -1px 0 0 #E6E7E8;
+  }
+
+  a {
+    color: #333;
+    &.link,
+    &.visited,
+    &.active {
+      color: #333;
+    }
+  }
+
+}
