@@ -38,7 +38,7 @@ const compile = modules => {
   const assets = gulp
     .src(['src/**/*.@(png|svg|eot|ttf|woff|woff2|otf)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir))
-  const static = gulp
+  const staticFiles = gulp
     .src(['src/static/**/*'])
     .pipe(gulp.dest(modules === false ? esDir + '/static' : libDir + '/static'))
   const js = gulp
@@ -64,7 +64,7 @@ const compile = modules => {
       })
     )
     .pipe(gulp.dest(modules === false ? esDir : libDir))
-  return merge2([sass, assets, js, static])
+  return merge2([sass, assets, js, staticFiles])
 }
 
 gulp.task('compile', () => compile(false))
