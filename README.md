@@ -17,6 +17,7 @@ npm i @hi-ui/genuine-theme --save
 
 ```
 import Layout from '@hi-ui/genuine-theme'
+import Icon from 'hi-ui/es/icon/index'
 
 <Layout />
 ```
@@ -58,8 +59,25 @@ const sider = {
 
 ```
 // router.js
-import Home from './Home'
-import Other from './Other'
+class Home extends Component{
+  render () {
+    return (
+      <div>
+        home
+      </div>
+    )
+  }
+}
+
+class Other extends Component{
+  render () {
+    return (
+      <div>
+        other
+      </div>
+    )
+  }
+}
 
 const routes = [
   {
@@ -104,7 +122,7 @@ const header = (
       {...breadCrumb}
     />
     <Login {...login} />
-    <NavMenu />
+    hello world
   </React.Fragment>
 )
 
@@ -183,14 +201,7 @@ Cascad：带标题的块
   status=''       // 想要标记的状态文字
 />
 
-InfoBlock：信息列表块
 
-<InfoBlock
-  title='标题'  // 块标题
-  list=[{label: '单号', info: '值'}]   // 列表数组
-/>
-
-```
 
 
 ## 其他主题链接
