@@ -1,17 +1,7 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "loose" : true,
-        "modules": false
-      }
-    ],
-    "stage-0",
-    "react"
+    "@babel/preset-env", "@babel/preset-react"
   ],
-  "plugins": [
-    "syntax-dynamic-import",
-    "react-hot-loader/babel"
-  ]
+  "compact": false,
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }

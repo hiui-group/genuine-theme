@@ -1,0 +1,167 @@
+@import '@hi-ui/core-css/index.scss';
+
+.login__menu--top {
+  background: #fff;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+  padding: 12px;
+}
+
+.hi-theme__header {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: $font-size-normal;
+  box-sizing: border-box;
+  z-index: 11;
+
+  &--light {
+    background: #fff !important;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    color: #333;
+
+    .hi-logo__title {
+      color: #333;
+    }
+
+    .hi-theme__toolbar {
+      color: #333;
+    }
+
+    .login__wrapper {
+      color: #333;
+    }
+
+    .main-menu-item {
+      a {
+        color: #333;
+      }
+    }
+
+    .active-main-menu {
+      background: #fff;
+      position: relative;
+
+      &::after {
+        content: '';
+        height: 2px;
+        width: 100%;
+        background: #4284f5;
+        bottom: 0;
+        position: absolute;
+      }
+    }
+
+    .sider__toggle {
+      padding: 0 12px;
+      cursor: pointer;
+
+      &:hover {
+        background: #4285f414;
+      }
+    }
+  }
+
+  &--dark {
+    background: #383e47 !important;
+    box-shadow: 0 2px 6px rgba(0, 21, 41, 0.35);
+    color: #fff;
+
+    .hi-theme__toolbar {
+      color: #fff;
+    }
+
+    .hi-logo__title {
+      color: #fff;
+    }
+
+    .login__wrapper {
+      color: #fff;
+    }
+
+    .main-menu-item {
+      a {
+        color: #fff;
+      }
+    }
+
+    .active-main-menu {
+      background: #2e343d;
+    }
+
+    .sider__toggle {
+      padding: 0 12px;
+      cursor: pointer;
+
+      &:hover {
+        background: #f8f8f9;
+      }
+    }
+  }
+
+  .sider__toggle {
+    padding: 0 12px;
+    cursor: pointer;
+  }
+
+  .login__wrapper {
+    margin-right: 24px;
+    cursor: pointer;
+
+    & > .hi-theme-icon {
+      margin-right: 6px;
+    }
+  }
+
+  .hi-theme__logo {
+    flex: 0 0 216px;
+
+    .hi-logo {
+      padding-left: 16px;
+    }
+
+    .hi-logo__img {
+      margin-right: 8px;
+    }
+  }
+
+  .hi-theme__login {
+    flex: 0 0 64px;
+  }
+
+  .hi-theme__toolbar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .hi-theme__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-left: 24px;
+
+    .main-menu-item {
+      display: flex;
+
+      a {
+        padding: 0 16px;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #4284f5;
+        }
+      }
+    }
+
+    .active-main-menu {
+      a {
+        color: #4284f5;
+      }
+    }
+  }
+}
