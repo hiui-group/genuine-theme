@@ -1,15 +1,13 @@
-<h1 align="center">Theme For HiUI</h1>
-
 ## 使用
 
 ```bash
-npm i @hi-ui/classic-theme --save
+npm i @hi-ui/genuine-theme --save
 // or
-yarn add @hi-ui/classic-theme
+yarn add @hi-ui/genuine-theme
 ```
 
 ```jsx
-import Theme from '@hi-ui/classic-theme'
+import Theme from '@hi-ui/genuine-theme'
 
 render(<Theme />, document.getElementById('app'))
 ```
@@ -20,7 +18,7 @@ render(<Theme />, document.getElementById('app'))
 
 ```jsx
 import React, { Component } from 'react'
-import { Theme } from '@hi-ui/classic-theme'
+import { Theme } from '@hi-ui/genuine-theme'
 import { Link } from 'react-router-dom'
 import { Input, Icon } from '@hi-ui/hiui'
 
@@ -96,7 +94,7 @@ export default App
 内部对 react-router 的 history 进行了封装
 
 ```jsx
-import Theme, {History} from '@hi-ui/classic-theme'
+import Theme, {History} from '@hi-ui/genuine-theme'
 
 History[`${your history type}`].push()
 ```
