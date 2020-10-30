@@ -1,200 +1,169 @@
-# Genuine Theme
+## 使用
 
-Genuine Theme 是基于 React 的 HIUI 主题。
-
-
-## 开始
-
-#### Install
-
-```
+```bash
 npm i @hi-ui/genuine-theme --save
+// or
+yarn add @hi-ui/genuine-theme
 ```
 
-#### 使用
+```jsx
+import Theme from '@hi-ui/genuine-theme'
 
-主题是组件的形式，可以直接按组件来使用
-
-```
-import Layout from '@hi-ui/genuine-theme'
-
-<Layout />
+render(<Theme />, document.getElementById('app'))
 ```
 
-#### 添加侧栏菜单
+## 示例
 
-添加 `sider` 属性
+基于配置化实现主题布局和菜单匹配，数组中元素的层级即代表其在菜单中的层级
 
-该属性是一个对象，包含 `items` 和 `top`。`items` 是一个包含多项对象的数组，包含索引值、选项、选项链接和子菜单。`top` 可以是任何元素。
+```jsx
+import React, { Component } from 'react'
+import { Theme } from '@hi-ui/genuine-theme'
+import { Link } from 'react-router-dom'
+import { Input, Icon } from '@hi-ui/hiui'
 
-```
-const sider = {
-  items: [
-    {key: 1, title: '首页', to: '/', icon: <Icon name='user' />},
-    {
-      key: 2, title: '表单', to: '', icon: <Icon name='usergroup' />,
-      children: [
-        {key: 21, title: '基础表单', to: '/order/base'},
-        {key: 22, title: '分组表单', to: '/order/group'},
-        {key: 23, title: '步骤表单', to: '/order/step'},
-        {key: 24, title: '高级表单', to: '/order/super'},
-      ]
-    },
-  ],
-  top: <a href='#'>HIUI</a>
-}
+const Mi = () => <div>小米手机</div>
+const RedMi = () => <div>红米手机</div>
+const BlackShark = () => <div>黑鲨手机</div>
+const TV = () => <div>小米电视</div>
+const SoundBox = () => (
+  <div>
+    小米音响<Link to='/robot-detail/1?b=1'>去详情页</Link>
+  </div>
+)
+const Robot = () => <div>米家扫地机器人</div>
+const RobotDetail = () => <div>米家扫地机器人详情页</div>
 
-<Layout 
-  sider={sider}
-/>
-```
-`<Icon />` 是引用的 `HIUI` 组件
-
-最多支持二级菜单，第二级菜单不赞成使用任何 icon。
-
-#### 路由
-
-添加路由文件，例如 `router.js`。并在主题组件中使用。
-
-```
-// router.js
-import Home from './Home'
-import Other from './Other'
-
-const routes = [
+const routeConfig = [
   {
-    path: '/home',
-    exact: true,
-    component: Home,
+    name: '手机',
+    children: [
+      { name: '小米', path: '/mi', component: Mi },
+      { name: '红米', path: '/red-mi', component: RedMi, withoutLayout: true },
+      { name: '黑鲨', path: '/black-shark', component: BlackShark }
+    ]
   },
+  { name: '电视', path: '/tv', component: TV },
   {
-    path: '/others',
-    exact: true,
-    component: Other,
+    name: '智能硬件',
+    children: [
+      { name: '音响', path: '/audio', component: SoundBox },
+      { name: '扫地机器人', path: '/robot', component: Robot },
+      { path: '/robot-detail/:id', component: RobotDetail }
+    ]
   }
 ]
 
-
-// 引用主题的文件
-<Layout
-  sider={sider}
-  routes={routes}
-/>
-```
-
-#### 页面头部自定义配置
-
-添加 `header` 属性
-
-此属性值为任何元素，没有默认值，完全自由，但是可以引用主题内置组件来自行拼装
-
-```
-import { Logo, Login } from '@hi-ui/genuine-theme'
-
-const login = {
-  headUrl: 'your_image_linking',
-  name: '叶静静',
-  children: <div style={{width: '100px'}}>这里是登录信息</div>,  // 点击后下拉框显示内容
+const logoConfig = {
+  logoUrl: 'https://xiaomi.github.io/hiui/static/img/logo.png?241e0618fe55d933c280e38954edea05',
+  name: 'HIUI Theme',
+  url: 'https://xiaomi.github.io/hiui/#/'
 }
 
-const header = (
-  <React.Fragment>
-    <BreadCrumb
-      style={{float: 'left'}}
-      {...breadCrumb}
-    />
-    <Login {...login} />
-    <NavMenu />
-  </React.Fragment>
-)
+const loginConfig = {
+  name: 'Mi Guest',
+  icon: 'user',
+  children: [
+    <div key='1' style={{ textAlign: 'center', margin: 4, width: '100px' }}>
+      <a href='#info'>个人信息</a>
+    </div>,
+    <div key='2' style={{ textAlign: 'center', margin: 4, width: 100 }}>
+      <a href='#logout'>注销</a>
+    </div>
+  ]
+}
+const toolbar = [<Input key='1' />, <Icon key='2' name='prompt' />]
 
-<Layout
-  header={header}
-  sider={sider}
-  routes={routes}
-/>
-```
-
-`BreadCrumb` 的位置可以自由控制，我们在页面头部的下面也预留有面包屑位置。可以参考下面。
-
-#### 面包屑
-
-添加 `breadCrumb` 属性
-
-此属性值为对象，没有默认值，不添加该属性即不显示面包屑
-
-```
-const breadCrumb = {
-  items: [
-    {title: '首页', to: '/'},
-    {title: '其他页面', to: ''},
-  ],
-  sign: '/'  // 分隔符号
+class App extends Component {
+  render() {
+    return <Theme routes={routeConfig} logo={logoConfig} login={loginConfig} toolbar={toolbar} />
+  }
 }
 
-<Layout
-  header={header}
-  breadCrumb={breadCrumb}
-  sider={sider}
-  routes={routes}
-/>
+export default App
 ```
 
-建议把面包屑选项的值 `breadCrumb.items` 放入 `redux` 控制，并在每个页面的 `componentDidMount` 生命周期段来修改
+## 关于路由跳转
 
-#### 主题色和主题种类
+### 组件内
 
-添加 `theme` 属性
+使用 react-router `<Link />` 即可
 
-此属性值为对象，默认为 `{ type: 'inner', color: 'dark' }`
+### API 跳转
 
-```
-<Layout
-  header={header}
-  breadCrumb={breadCrumb}
-  sider={sider}
-  routes={routes}
-  theme={{
-    type: 'outer',
-    color: 'blue'
-  }}
-/>
+内部对 react-router 的 history 进行了封装
+
+```jsx
+import Theme, {History} from '@hi-ui/genuine-theme'
+
+History[`${your history type}`].push()
 ```
 
-> `dark` 深色主题
->
-> `gray` 灰色主题
+详细使用可参考 react-router 官网
 
-> `inner` 扁平主题
->
-> `outer` 凹陷主题
+## API
 
+### Theme
 
-## 内部组件
+| 属性名            | 描述                                     | 类型                                                       | 默认值                      |
+| ----------------- | ---------------------------------------- | ---------------------------------------------------------- | --------------------------- |
+| type              | 主题类型                                 | 'classic' \| 'genuine'                                     |
+'classic'                   |
+| dynamic              | 开启动态布局                                 | boolean                                     |
+true                   |
+| routes            | 路由配置项                               | Route[]                                                    | -                           |
+| logo              | 系统 logo                                | ReactNode                                                  | -                           |
+| login             | 系统登录配置项                           | ReactNode                                                  | -                           |
+| historyType       | 路由跳转类型                             | 'hashHistory' \| 'browserHistory'                          | 'browserHistory'            |
+| header            | genuine 类型下的顶部功能栏               | ReactNode \| null                                          | 不传时默认为主题自带 header |
+| apperance         | 主题外观配置项                           | Apperance                                                  | {color:'dark'}              |
+| logo              | 主题 logo 配置项                         | Logo \| (toggle: boolean) => Logo                          | -                           |
+| login             | 主题登录信息配置项                       | Login                                                      | -                           |
+| toolbar           | 顶部工具栏，一般用于放置通知、全局搜索等 | ReactNode                                                  | -                           |
+| pageHeader        | 自定义页头                               | (selectedMenus: Route [], location: Location) => ReactNode | -                           |
+| defaultExpandAll  | 是否默认展开侧边栏菜单                   | boolean                                                    | false                       |
+| siderTopRender    | 侧边栏自定义顶部渲染区域                 | (toggle: boolean) => ReactNode                             | -                           |
+| siderBottomRender | 侧边栏自定义底部渲染区域                 | (toggle: boolean) => ReactNode                             | -                           |
+| accordion         | 左侧菜单是否采用手风琴模式               | boolean                                                    | true                        |
+| basename          | 路由基础路径                             | string                                                     | '/'                         |
+| authority         | 用户拥有权限配置                         | string[]                                                   | -                           |
+| fallback          | 路由无法匹配时的候补跳转                 | string                                                     | -                           |
+| onToggle          | 侧边栏展开收起触发的回调                 | mini: boolean => void                                      | -                           |
 
-内部可引用的组件：`Cascad, InfoBlock, Logo, Login, BreadCrumb`
+### type: Route
 
-```
-Cascad：带标题的块
+| 属性名        | 描述                                     | 类型      | 默认值 |
+| ------------- | ---------------------------------------- | --------- | ------ |
+| name          | 菜单名称                                 | string    | -      |
+| icon          | 菜单 icon                                | string    | -      |
+| children      | 子菜单配置项                             | Route[]   | -      |
+| path          | 菜单跳转路径                             | string    | -      |
+| exact         | 菜单跳转路径是否严格匹配对应的 component | boolean   | true   |
+| component     | 菜单对应页面组件                         | ReactNode | -      |
+| withoutLayout | 页面组件渲染时，不显示顶部导航栏和侧边栏 | boolean   | false  |
+| extraData     | 向路由匹配的页面组件注入额外的数据       | object    | -      |
+| authority     | 允许访问该路由的权限                     | string[]  | -      |
 
-<Cascad 
-  title='标题'  // 块标题
-  children=''     // 想要嵌入的任意元素
-  status=''       // 想要标记的状态文字
-/>
+### type: Apperance
 
-InfoBlock：信息列表块
+| 属性名            | 描述           | 类型              | 默认值    |
+| ----------------- | -------------- | ----------------- | --------- |
+| color             | 主题颜色       | 'dark' \| 'light' | 'dark'    |
+| contentBackground | 内容区域背景色 | string            | '#f6f6f6' |
+| contentPadding    | 内容区域内边距 | number            | 0         |
 
-<InfoBlock
-  title='标题'  // 块标题
-  list=[{label: '单号', info: '值'}]   // 列表数组
-/>
+### tye: Logo
 
-```
+| 属性名  | 描述               | 类型   | 默认值 |
+| ------- | ------------------ | ------ | ------ |
+| name    | 系统名称           | string | -      |
+| logoUrl | logo 图片地址      | string | -      |
+| url     | 点击 logo 跳转地址 | string | -      |
 
+### type: Login
 
-## 其他主题链接
-
-- [Classic 主题](https://www.npmjs.com/package/@hi-ui/classic-theme)
-
--- EOF --
+| 属性名   | 描述          | 类型        | 默认值 |
+| -------- | ------------- | ----------- | ------ |
+| name     | 登录用户姓名  | string      | -      |
+| icon     | 登录用户 icon | string      | -      |
+| children | 登录菜单项    | ReactNode[] | -      |

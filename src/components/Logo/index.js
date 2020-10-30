@@ -1,26 +1,14 @@
 import React from 'react'
-import './index.scss'
+import classNames from 'classnames'
+import './style/index'
 
-class Logo extends React.Component {
-  render () {
-    const {
-      imgUrl = '',
-      text = '',
-      alt,
-      height = '20',
-      url,
-      style
-    } = this.props
-
-    return (
-      <div className='logo' style={style}>
-        <a href={url} className='logo-box'>
-          <img src={imgUrl} alt={alt} height={height} />
-          <span className='logo-title'>{text}</span>
-        </a>
-      </div>
-    )
-  }
+const Logo = ({ alt, height = 32, logoUrl, name, url, layout = 'horizontal', mini }) => {
+  return (
+    <a className={classNames('hi-logo', `hi-logo--${layout}`, { 'hi-logo--mini': mini })} href={url}>
+      {logoUrl && <img src={logoUrl} alt={alt} height={height} />}
+      {name && !mini && <span className="hi-logo__title">{name}</span>}
+    </a>
+  )
 }
 
 export default Logo

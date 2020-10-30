@@ -1,16 +1,8 @@
 import React from 'react'
-import './index.scss'
+import './style/index'
 
-class Footer extends React.Component {
-  render () {
-    const { className, footer } = this.props
-
-    return (
-      <div id='J_Footer' className={`footer ${className}`}>
-        {footer}
-      </div>
-    )
-  }
+const Footer = ({ footer }) => {
+  return <div className="hi-theme__footer">{footer}</div>
 }
 
 export default Footer

@@ -1,0 +1,35 @@
+.theme-change {
+  position: fixed;
+  top: 200px;
+  right: 0;
+  height: 84px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  z-index: 9999;
+
+  &:hover {
+    right: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    border-radius: 2px;
+    margin: 0;
+    flex: 1;
+    width: 108px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+
+    li {
+      padding: 10px 5px;
+    }
+  }
+
+  .menu-show {
+    display: block;
+  }
+}

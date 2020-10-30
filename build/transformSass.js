@@ -4,7 +4,7 @@ const postcss = require('postcss')
 const path = require('path')
 const postcssConfig = require('./postcssConfig')
 
-function transformSass (sassFile, config = {}) {
+function transformSass(sassFile, config = {}) {
   const { cwd = process.cwd() } = config
   const resolvedSassFile = path.resolve(cwd, sassFile)
 
@@ -13,20 +13,24 @@ function transformSass (sassFile, config = {}) {
 
   return new Promise((resolve, reject) => {
     if (resolve) {
-      sass.render({
-        file: resolvedSassFile,
-        data: data,
-        outputStyle: 'compressed'
-      }, function (error, result) {
-        // console.log(result.css)
-        // console.log(result.css.toString(), 'this is result')
-        if (!error) {
-          const css = postcss(postcssConfig.plugins).process(result.css.toString()).then(r => r.css)
-          resolve(css)
-        } else {
-          reject(error)
+      sass.render(
+        {
+          file: resolvedSassFile,
+          includePaths: ['./node_modules'],
+          data: data,
+          outputStyle: 'compressed'
+        },
+        function (error, result) {
+          if (!error) {
+            const css = postcss(postcssConfig.plugins)
+              .process(result.css.toString())
+              .then((r) => r.css)
+            resolve(css)
+          } else {
+            reject(error)
+          }
         }
-      })
+      )
     } else {
       throw new Error('Error')
     }
