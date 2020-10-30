@@ -33,7 +33,8 @@ const Layout = ({
   pageHeader,
   onToggle,
   authority,
-  dynamic = true
+  dynamic = true,
+  env
 }) => {
   const [viewSize, setViewSize] = useState('large')
   const [siderVisible, setSiderVisible] = useState(true)
@@ -63,6 +64,14 @@ const Layout = ({
     historyForLayout.current = historyGenerator[historyType]({ basename })
     _history[historyType] = historyForLayout.current
   }
+  const _apperance = Object.assign({}, defaultApperance, apperance)
+  if (
+    env === 'electron' ||
+    window.navigator.userAgent.includes('lark') ||
+    window.navigator.userAgent.includes('electron')
+  ) {
+    _apperance.color = 'light'
+  }
   return (
     <Router history={historyForLayout.current}>
       <Route
@@ -76,7 +85,7 @@ const Layout = ({
             toolbar={toolbar}
             footer={footer}
             type={type}
-            apperance={Object.assign({}, defaultApperance, apperance)}
+            apperance={_apperance}
             logo={logo}
             login={login}
             header={header}

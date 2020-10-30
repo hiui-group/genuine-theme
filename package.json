@@ -1,7 +1,7 @@
 {
-  "name": "@hi-ui/classic-theme",
-  "version": "3.1.0-rc",
-  "description": "Classic theme for HIUI",
+  "name": "@hi-ui/genuine-theme",
+  "version": "3.0.0",
+  "description": "Genuine theme for HIUI",
   "main": "./es/index.js",
   "scripts": {
     "test": "node_modules/.bin/standard && node_modules/.bin/stylelint --config .stylelintrc 'src/**/*.scss'",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:hiui-group/classic-theme.git"
+    "url": "git@github.com:hiui-group/genuine-theme.git"
   },
   "keywords": [
     "hiui",
