@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import Header from '../Header'
 import Sider from '../Sider'
 import { Route, Redirect } from 'react-router-dom'
@@ -31,6 +31,7 @@ const ClassicLayout = ({
   setSiderVisible,
   type
 }) => {
+  const containerRef = useRef(null)
   const mainMenu = useMainMenu(menu, authority)
   const { currentMenu, selectedMenus, onSelectMenu } = useMenuCalculator(menu, { location, history }, fallback)
   const isWithoutLayout = currentMenu && currentMenu.withoutLayout
@@ -59,7 +60,7 @@ const ClassicLayout = ({
       />
     ),
     (!isWithoutLayout && (
-      <div key="container" className="hi-theme--classic">
+      <div key="container" className="hi-theme--classic" ref={containerRef}>
         {_siderMenu.length > 0 && (
           <Sider
             siderMenu={_siderMenu}
@@ -75,6 +76,7 @@ const ClassicLayout = ({
             setSiderVisible={setSiderVisible}
             type={type}
             color={apperance.color}
+            container={containerRef.current}
           />
         )}
         <div className="hi-theme__wrapper">
