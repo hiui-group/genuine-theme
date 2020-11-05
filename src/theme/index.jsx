@@ -67,8 +67,8 @@ const Layout = ({
   const _apperance = Object.assign({}, defaultApperance, apperance)
   if (
     env === 'electron' ||
-    window.navigator.userAgent.includes('lark') ||
-    window.navigator.userAgent.includes('electron')
+    window.navigator.userAgent.toLocaleLowerCase().includes('lark') ||
+    window.navigator.userAgent.toLocaleLowerCase().includes('electron')
   ) {
     _apperance.color = 'light'
   }
