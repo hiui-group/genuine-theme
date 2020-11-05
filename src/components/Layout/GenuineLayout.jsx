@@ -43,6 +43,8 @@ const GenuineLayout = ({
       logo={logo}
       type={type}
       color={apperance.color}
+      location={location}
+      selectedMenus={selectedMenus}
     />
   )
   const routes = getRoutes(menu)

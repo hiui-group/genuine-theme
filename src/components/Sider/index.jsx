@@ -146,6 +146,7 @@ const Sider = ({
     [onSelectMenu, siderVisible]
   )
   const logoConfig = typeof logo === 'function' ? logo(mini) : logo
+  const loginConfig = typeof login === 'function' ? login(mini) : login
 
   return (
     <>
@@ -156,7 +157,6 @@ const Sider = ({
           {
             'hi-theme__sider--mini': mini,
             'hi-theme__sider--hide': viewSize === 'small'
-            // 'hi-theme__sider--popup': viewSize === 'small' && siderVisible === true
           }
         )}
         ref={siderRef}
@@ -175,7 +175,7 @@ const Sider = ({
         {siderBottomRender && siderBottomRender(mini)}
         <div className="sider__footer">
           <Toggle show={!(viewSize === 'small' && siderVisible === true)} collapsed={mini} onToggle={toggle} />
-          {login && (
+          {loginConfig && (
             <React.Fragment>
               <div
                 className={'sider__login'}
@@ -185,8 +185,12 @@ const Sider = ({
                 }}
               >
                 <span>
-                  <Icon name={login.icon} style={{ marginRight: mini ? 0 : 8 }} />
-                  {!mini && login.name}
+                  {typeof loginConfig.icon === 'function' ? (
+                    loginConfig.icon()
+                  ) : (
+                    <Icon name={loginConfig.icon} style={{ marginRight: mini ? 0 : 8 }} />
+                  )}
+                  {!mini && loginConfig.name}
                 </span>
                 {!mini && <Icon name={'caret-right'} style={{ marginLeft: 4, color: loginVisible && '#4284f5' }} />}
               </div>
@@ -200,7 +204,7 @@ const Sider = ({
                 leftGap={2}
               >
                 <div ref={popperRef} className="login__menu--top">
-                  {login.children}
+                  {loginConfig.children}
                 </div>
               </Popper>
             </React.Fragment>
@@ -234,7 +238,7 @@ const Sider = ({
           {siderBottomRender && siderBottomRender(mini)}
           <div className="sider__footer">
             <Toggle show={!(viewSize === 'small' && siderVisible === true)} collapsed={mini} onToggle={toggle} />
-            {login && (
+            {loginConfig && (
               <React.Fragment>
                 <div
                   className={'sider__login'}
@@ -244,8 +248,12 @@ const Sider = ({
                   }}
                 >
                   <span>
-                    <Icon name={login.icon} style={{ marginRight: 8 }} />
-                    {login.name}
+                    {typeof loginConfig.icon === 'function' ? (
+                      loginConfig.icon()
+                    ) : (
+                      <Icon name={loginConfig.icon} style={{ marginRight: 8 }} />
+                    )}
+                    {loginConfig.name}
                   </span>
                   <Icon name={'caret-right'} style={{ marginLeft: 4, color: drawerLoginVisible && '#4284f5' }} />
                 </div>
@@ -259,7 +267,7 @@ const Sider = ({
                   leftGap={2}
                 >
                   <div ref={popperRef} className="login__menu--top">
-                    {login.children}
+                    {loginConfig.children}
                   </div>
                 </Popper>
               </React.Fragment>

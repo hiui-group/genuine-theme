@@ -19,12 +19,14 @@ const Header = ({
   setSiderVisible,
   siderVisible,
   type,
-  color
+  color,
+  location,
+  selectedMenus
 }) => {
   const [loginVisible, setLoginVisible] = useState(false)
   const popperRef = useRef(null)
   const loginRef = useRef(null)
-  const logoConfig = typeof logo === 'function' ? logo(mini) : logo
+  const logoConfig = typeof logo === 'function' ? logo(mini, viewSize) : logo
   return (
     <div
       className={ClassNames(
@@ -47,7 +49,6 @@ const Header = ({
       {((logo && type === 'classic') || (logo && type === 'genuine' && viewSize === 'small')) && (
         <Logo {...logoConfig} mini={viewSize === 'small'} layout="horizontal" />
       )}
-
       {mainMenu && (
         <ul className="hi-theme__menu" style={{ flex: toolbar ? '0 0 auto' : 1 }}>
           {mainMenu.map((menu) => (
@@ -72,7 +73,13 @@ const Header = ({
           ))}
         </ul>
       )}
-      {toolbar && <div className="hi-theme__toolbar">{toolbar}</div>}
+      {toolbar && (
+        <div className="hi-theme__toolbar">
+          {typeof toolbar === 'function'
+            ? selectedMenus && selectedMenus.length > 0 && toolbar(selectedMenus, location)
+            : toolbar}
+        </div>
+      )}
       {login && (
         <React.Fragment>
           <div
