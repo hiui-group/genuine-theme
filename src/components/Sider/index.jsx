@@ -211,70 +211,72 @@ const Sider = ({
           )}
         </div>
       </div>
-      <Drawer
-        visible={viewSize === 'small' && siderVisible}
-        placement="left"
-        onClose={() => {
-          setSiderVisible(false)
-        }}
-        container={container}
-      >
-        <div
-          className={classNames(
-            'hi-theme__sider',
-            `hi-theme__sider--${color === 'dark' && type === 'genuine' ? 'dark' : 'light'}`
-          )}
-          ref={siderRef}
+      {viewSize === 'small' && (
+        <Drawer
+          visible={siderVisible}
+          placement="left"
+          onClose={() => {
+            setSiderVisible(false)
+          }}
+          container={container}
         >
-          {logo && <Logo {...logoConfig} mini={false} />}
-          {siderTopRender && siderTopRender(mini)}
-          {siderMenu.length > 0 && (
-            <div className="sider__menu">
-              <div style={{ height: '100%', overflowY: 'scroll', width: `calc(100% + ${scrollBarSize.current}px)` }}>
-                {renderChildren(siderMenu, selectedMenus, 1, expandedId)}
-              </div>
-            </div>
-          )}
-          {siderBottomRender && siderBottomRender(mini)}
-          <div className="sider__footer">
-            <Toggle show={!(viewSize === 'small' && siderVisible === true)} collapsed={mini} onToggle={toggle} />
-            {loginConfig && (
-              <React.Fragment>
-                <div
-                  className={'sider__login'}
-                  ref={drawerLoginRef}
-                  onClick={(e) => {
-                    setDrawerLoginVisible(!drawerLoginVisible)
-                  }}
-                >
-                  <span>
-                    {typeof loginConfig.icon === 'function' ? (
-                      loginConfig.icon()
-                    ) : (
-                      <Icon name={loginConfig.icon} style={{ marginRight: 8 }} />
-                    )}
-                    {loginConfig.name}
-                  </span>
-                  <Icon name={'caret-right'} style={{ marginLeft: 4, color: drawerLoginVisible && '#4284f5' }} />
-                </div>
-                <Popper
-                  show={drawerLoginVisible}
-                  attachEle={drawerLoginRef.current}
-                  zIndex={1050}
-                  placement="right-end"
-                  onClickOutside={() => setDrawerLoginVisible(false)}
-                  width={'auto'}
-                  leftGap={2}
-                >
-                  <div ref={popperRef} className="login__menu--top">
-                    {loginConfig.children}
-                  </div>
-                </Popper>
-              </React.Fragment>
+          <div
+            className={classNames(
+              'hi-theme__sider',
+              `hi-theme__sider--${color === 'dark' && type === 'genuine' ? 'dark' : 'light'}`
             )}
+            ref={siderRef}
+          >
+            {logo && <Logo {...logoConfig} mini={false} />}
+            {siderTopRender && siderTopRender(mini)}
+            {siderMenu.length > 0 && (
+              <div className="sider__menu">
+                <div style={{ height: '100%', overflowY: 'scroll', width: `calc(100% + ${scrollBarSize.current}px)` }}>
+                  {renderChildren(siderMenu, selectedMenus, 1, expandedId)}
+                </div>
+              </div>
+            )}
+            {siderBottomRender && siderBottomRender(mini)}
+            <div className="sider__footer">
+              <Toggle show={!(viewSize === 'small' && siderVisible === true)} collapsed={mini} onToggle={toggle} />
+              {loginConfig && (
+                <React.Fragment>
+                  <div
+                    className={'sider__login'}
+                    ref={drawerLoginRef}
+                    onClick={(e) => {
+                      setDrawerLoginVisible(!drawerLoginVisible)
+                    }}
+                  >
+                    <span>
+                      {typeof loginConfig.icon === 'function' ? (
+                        loginConfig.icon()
+                      ) : (
+                        <Icon name={loginConfig.icon} style={{ marginRight: 8 }} />
+                      )}
+                      {loginConfig.name}
+                    </span>
+                    <Icon name={'caret-right'} style={{ marginLeft: 4, color: drawerLoginVisible && '#4284f5' }} />
+                  </div>
+                  <Popper
+                    show={drawerLoginVisible}
+                    attachEle={drawerLoginRef.current}
+                    zIndex={1050}
+                    placement="right-end"
+                    onClickOutside={() => setDrawerLoginVisible(false)}
+                    width={'auto'}
+                    leftGap={2}
+                  >
+                    <div ref={popperRef} className="login__menu--top">
+                      {loginConfig.children}
+                    </div>
+                  </Popper>
+                </React.Fragment>
+              )}
+            </div>
           </div>
-        </div>
-      </Drawer>
+        </Drawer>
+      )}
     </>
   )
 }
