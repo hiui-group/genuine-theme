@@ -49,7 +49,7 @@ const NormalMenu = ({
             onSelectMenu(menu)
           }
         }}
-        style={{ paddingLeft: level * 16 }}
+        style={{ paddingLeft: 16 + (level - 1) * 20 }}
         className={classNames('menu__title', {
           'menu__title--active':
             selectedMenus &&
