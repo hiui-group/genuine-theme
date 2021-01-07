@@ -1,6 +1,6 @@
 {
   "name": "@hi-ui/genuine-theme",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Genuine theme for HIUI",
   "main": "./es/index.js",
   "scripts": {
